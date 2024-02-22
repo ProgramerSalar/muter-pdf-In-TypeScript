@@ -1,3 +1,5 @@
+import { Request } from "express";
+import { Callback } from "mongoose";
 import multer from "multer";
 
 const storage = multer.diskStorage({
@@ -10,9 +12,20 @@ const storage = multer.diskStorage({
   },
 });
 
+// how to set validation 
+const fileFilter = (req, file, cb) => {
+  if(file.mimetype.split("/")[0] === 'image'){
+    cb(null, true)
+
+  }else{
+    cb(new Error("file is not of correct type"), false)
+  }
+
+}
+
 
 // single file upload using multer 
-// export const Singleupload = multer({ storage: storage }).single('file')
+export const Singleupload = multer({ storage: storage, fileFilter }).single('file')
 
 
 // multiple file upload using multer 
@@ -21,8 +34,10 @@ const storage = multer.diskStorage({
 
 // multiple image upload 
 // what is name, this is accept of file name 
-export const Singleupload = multer({ storage: storage }).fields([
-  {name:"avatar", maxCount:10},
-  {name:'photo', maxCount:10}
-])
+// export const Singleupload = multer({ storage: storage }).fields([
+//   {name:"avatar", maxCount:10},
+//   {name:'photo', maxCount:10}
+// ])
+
+
 
