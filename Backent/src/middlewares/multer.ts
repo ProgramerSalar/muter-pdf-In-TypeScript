@@ -10,6 +10,19 @@ const storage = multer.diskStorage({
   },
 });
 
-export const Singleupload = multer({ storage: storage }).single('file')
 
+// single file upload using multer 
+// export const Singleupload = multer({ storage: storage }).single('file')
+
+
+// multiple file upload using multer 
+export const Singleupload = multer({ storage: storage }).array('file')
+
+
+// multiple image upload 
+// what is name, this is accept of file name 
+// export const Singleupload = multer({ storage: storage }).fields([
+//   {name:"avatar", maxCount:10},
+//   {name:'photo', maxCount:10}
+// ])
 

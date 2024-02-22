@@ -6,13 +6,18 @@ export const PostPdf = async (
   res: Response,
   next: NextFunction
 ) => {
+
+  
+  
   const name = req.body.name;
-  const pdf = req.file?.filename;
+  let file = req.files
+  // const pdf = req.file?.filename;
 
-  // console.log(pdf)
-  // console.log(name)
+  console.log("file",file)
+  console.log("name",name)
 
-  const userPdf = await PdfModel.create({ name, pdf });
+  const userPdf = await PdfModel.create({ name, file });
+  // const userPdf = await PdfModel.create({ name, pdf });
   // console.log(userPdf);
 
   res.status(200).json({
